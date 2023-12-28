@@ -21,10 +21,25 @@ class Simple_drawing_window (QWidget):
         p.drawPolygon ([QPoint ( 50, 200), QPoint (150, 200), QPoint (100, 400),])
         p.drawPixmap (QRect (200, 200, 100, 100), self. rabbit)
         p.end ()
+
+class Simple_drawing_window_Jar (QWidget):
+
+    def __init__(self):
+        QWidget.__init__(self,None)
+        self.setWindowTitle("Simple GitHub Drawing")
+        self.rabbit = QPixmap("images/rabbit.png")
+    def paintEvent (self, e):
+        p = QPainter()
+        p.begin(self)
+        p.drawRect(200,0,100,100)
+        p.end ()
+
 def main ():
     app = QApplication(sys. argv)
-    w = Simple_drawing_window()
+    w = Simple_drawing_window_Jar()
     w. show()
-    return app. exec ()
+    a = Simple_drawing_window()
+    a.show()
+    return app.exec()
 if __name__ == '__main__':
     sys.exit(main())
