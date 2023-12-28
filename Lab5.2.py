@@ -3,27 +3,7 @@ from PySide6. QtCore import *
 from PySide6. QtWidgets import * 
 from PySide6. QtGui import *
 
-class Simple_drawing_window (QWidget):
-
-    def __init__(self):
-        QWidget.__init__(self,None)
-        self.setWindowTitle("Simple GitHub Drawing")
-        self.rabbit = QPixmap("images/rabbit.png")
-    def paintEvent (self, e):
-        p = QPainter()
-        p.begin(self)
-        p.setPen (QColor (0, 0, 0))
-        p.setBrush (QColor (0, 127, 0))
-        p.drawPolygon ([QPoint ( 70, 100), QPoint (100, 110),QPoint (130, 100), QPoint (100, 150),])
-        p.setPen (QColor (255, 127, 0))
-        p.setBrush (QColor (255, 127, 0))
-        p.drawPie (50, 150, 100, 100, 0, 180 * 16)
-        p.drawPolygon ([QPoint ( 50, 200), QPoint (150, 200), QPoint (100, 400),])
-        p.drawPixmap (QRect (200, 200, 100, 100), self. rabbit)
-        p.end ()
-
 class Simple_drawing_window_Jar (QWidget):
-
     def __init__(self):
         QWidget.__init__(self,None)
         self.setWindowTitle("Simple GitHub Drawing")
@@ -33,12 +13,33 @@ class Simple_drawing_window_Jar (QWidget):
         p.begin(self)
         p.drawRect(200,0,100,100)
         p.end ()
-
+class Simple_drawing_window_Prem(QWidget):
+    def __init__(self):
+        QWidget.__init__(self,None)
+        self.setWindowTitle("Simple GitHub Drawing")
+        self.rabbit = QPixmap("images/rabbit.png")
+    def paintEvent (self, e):
+        p = QPainter()
+        p.begin(self)
+        p.setRenderHint(QPainter.Antialiasing)
+        # make a white drawing background
+        p.setBrush(Qt.white)
+        p.drawRect(e.rect())
+        # for circle make the ellipse radii match
+        radx = 100
+        rady = 100
+        # draw red circles
+        p.setPen(Qt.red)
+        for k in range(125, 220, 10):
+            center = QPoint(k, k)
+            # optionally fill each circle yellow
+            p.setBrush(Qt.yellow)
+            p.drawEllipse(center, radx, rady)
+        p.end()
+        
 def main ():
     app = QApplication(sys. argv)
-    w = Simple_drawing_window_Jar()
-    w. show()
-    a = Simple_drawing_window()
+    w = Simple_drawing_window_Prem()
     a.show()
     return app.exec()
 if __name__ == '__main__':
