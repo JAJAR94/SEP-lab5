@@ -20,6 +20,8 @@ class Simple_drawing_window (QWidget):
         p.drawPie (50, 150, 100, 100, 0, 180 * 16)
         p.drawPolygon ([QPoint ( 50, 200), QPoint (150, 200), QPoint (100, 400),])
         p.drawPixmap (QRect (200, 200, 100, 100), self. rabbit)
+
+        
         p.end ()
 def main ():
     app = QApplication(sys. argv)
